@@ -1,24 +1,28 @@
-import React, { Component } from 'react'
+const React = require('react');
 
-export default class Index extends Component {
-render() {
-    const { flights } = this.props;
+class Index extends React.Component {
+  render() {
+    const { flights } = this.props; // Change 'flight' to 'flights' to match the prop name
+
     return (
-    <div>
-        <h1>Flight Index</h1>
+      <div>
+        <h1>See All The Flights</h1>
         <nav>
-        <a href="/flights/new">Create A Flight</a>
+          <a href="/flights/new">Create a New Flight</a>
         </nav>
         <ul>
-        {
-        flights.map((flight, i) => {
-            return (
-            <li key={i}>{`${flight.airline} ${flight.flightNo} ${flight.departs}`}</li>
-            )
-        })
-        }
+          {flights.map((flight, i) => (
+            <li key={i}>
+              <p>Airline: {flight.airline}</p>
+              <p>Flight #: {flight.flightNo}</p>
+              <p>Departure: {flight.departs.toString()}</p>
+              <a href={`/flights/${flight._id}`}>Details</a>
+            </li>
+          ))}
         </ul>
-    </div>
-    )
+      </div>
+    );
+  }
 }
-}
+
+module.exports = Index;
